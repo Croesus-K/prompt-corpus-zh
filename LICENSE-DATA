@@ -1,0 +1,7 @@
+# 数据许可证
+
+本仓库 `corpus/` 目录下的语料数据（JSON 条目）以 **Creative Commons Attribution 4.0 International（CC-BY 4.0）** 许可发布。
+
+- 全文：https://creativecommons.org/licenses/by/4.0/legalcode.zh
+- 使用要求：署名「prompt-corpus-zh 项目」并注明来源仓库
+- 代码部分（脚本、schema 文件）另见 LICENSE-CODE（MIT）
