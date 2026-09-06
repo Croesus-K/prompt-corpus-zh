@@ -4,6 +4,9 @@
   "description": "中文提示注入攻击语料库 —— InjectArena / prompt-audit 共享的语料资产层。Chinese prompt-injection attack corpus (zh/mixed) as a versioned shared asset; code MIT, data CC-BY-4.0.",
   "license": "MIT AND CC-BY-4.0",
   "type": "module",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "engines": {
     "node": ">=18"
   },
