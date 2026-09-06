@@ -28,9 +28,20 @@ InjectArena（攻）与 prompt-audit（守）共用的中文攻击语料的**独
 
 ## 路线图
 
-- [ ] M3 前：schema v2 RFC 评审通过（[RFC-0001](docs/rfc/RFC-0001-corpus-schema-v2.md)）
-- [ ] M4：从 InjectArena `corpus/*.json` 抽取 seed 语料，发布 npm 首版 + HF dataset 首版
-- [ ] M4：`SCHEMA-RFC.md` 流程跑通（首个变更提案走完 review）
+- [x] M4 前置：schema v2 RFC 起草（[RFC-0001](docs/rfc/RFC-0001-corpus-schema-v2.md)，draft 待非提案方 review）
+- [x] M4：seed 语料入库——`npm run extract` 从 InjectArena 抽取（零变换 + 校验），116 条 / 6 攻击面，溯源见 `corpus/_meta.json`
+- [x] M4：周回流脚本——`npm run flywheel -- --export <导出URL或文件>`，只走公开接口（治理规则 2），输出人工闸候选（宁可少收不可收毒）
+- [ ] 人工闸跑通首批候选（等 InjectArena 部署实例产生真实破阵记录）
+- [ ] npm 首版发布 + HuggingFace dataset 首版（发布动作等维护者确认）
+- [ ] `SCHEMA-RFC.md` 流程跑通（首个变更提案走完 review）
+
+## 脚本
+
+| 命令 | 作用 |
+|---|---|
+| `npm run extract -- <InjectArena 路径>` | seed 抽取：逐字复制 + 校验（id/枚举/唯一性/v2 字段禁用）+ 溯源 `_meta.json` |
+| `npm run validate` | 语料校验：含 RFC-0001 v2 字段约束 + 真实密钥/未打码 FLAG 拒收 |
+| `npm run flywheel -- --export <file\|url>` | 攻→审回流：`injectarena-export@1` → 人工闸候选（`arena-candidates@1`） |
 
 ## License
 
