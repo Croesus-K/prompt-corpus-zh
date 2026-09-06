@@ -1,5 +1,9 @@
 # prompt-corpus-zh
 
+[![npm](https://img.shields.io/npm/v/prompt-corpus-zh)](https://www.npmjs.com/package/prompt-corpus-zh)
+![license](https://img.shields.io/badge/code%20MIT%20%7C%20data%20CC--BY--4.0-blue)
+[![GitHub](https://img.shields.io/badge/GitHub-Croesus%2FK--prompt--corpus--zh-181717?logo=github)](https://github.com/Croesus-K/prompt-corpus-zh)
+
 > 中文提示注入攻击语料库 —— 三项目共享的语料资产层。npm 包 + HuggingFace dataset 同步；代码 MIT，数据 CC-BY 4.0。
 
 ## 这是什么
