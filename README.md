@@ -24,6 +24,8 @@ InjectArena（攻）与 prompt-audit（守）共用的中文攻击语料的**独
 
 回流只走公开接口（方案 v2 · 治理规则 2）：攻 → 审走 InjectArena `/api/leaderboard` JSON 导出；审 → 攻走 prompt-audit `--export-corpus` CLI 输出。**人工闸必须保留：宁可少收，不可收毒。**
 
+**公共实例已上线**：InjectArena 部署于乌托邦站内靶场 <https://croesus-k.top/arena/>（BYOK：玩家自带 Key），导出通道可直接喂给回流脚本——`npm run flywheel -- --export "https://croesus-k.top/api/arena/leaderboard?format=export"`（FLAG 源头打码）。
+
 ## 版本策略
 
 - `minor`：只增条目（同攻击面、不改既有条目语义）——消费方可选升级
@@ -35,8 +37,9 @@ InjectArena（攻）与 prompt-audit（守）共用的中文攻击语料的**独
 - [x] M4 前置：schema v2 RFC 起草（[RFC-0001](docs/rfc/RFC-0001-corpus-schema-v2.md)，draft 待非提案方 review）
 - [x] M4：seed 语料入库——`npm run extract` 从 InjectArena 抽取（零变换 + 校验），116 条 / 6 攻击面，溯源见 `corpus/_meta.json`
 - [x] M4：周回流脚本——`npm run flywheel -- --export <导出URL或文件>`，只走公开接口（治理规则 2），输出人工闸候选（宁可少收不可收毒）
-- [ ] 人工闸跑通首批候选（等 InjectArena 部署实例产生真实破阵记录）
-- [ ] npm 首版发布 + HuggingFace dataset 首版（发布动作等维护者确认）
+- [ ] 人工闸跑通首批候选（公共实例已上线，导出通道可用；攻方真实破阵 payload 尚待积累，见 [arena 实例](https://croesus-k.top/arena/)）
+- [x] npm 首版发布（`0.1.0` 已上架）
+- [ ] HuggingFace dataset 首版（发布动作等维护者确认）
 - [ ] `SCHEMA-RFC.md` 流程跑通（首个变更提案走完 review）
 
 ## 脚本
