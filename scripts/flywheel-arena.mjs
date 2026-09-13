@@ -12,7 +12,7 @@
  * 真实密钥形状，命中即丢弃该条并在摘要里计数（纵深防御）。
  */
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
-import { join } from "node:path";
+import { join, dirname } from "node:path";
 
 function arg(name) {
   const i = process.argv.indexOf(`--${name}`);
@@ -37,16 +37,23 @@ if (/^https?:\/\//.test(exportArg)) {
 } else {
   payload = JSON.parse(readFileSync(exportArg, "utf8"));
 }
-if (payload.format !== "injectarena-export@1" || !Array.isArray(payload.breaches)) {
-  console.error("输入不是 injectarena-export@1 导出（请使用 /api/leaderboard?format=export）");
+if (!/^injectarena-export@[12]$/.test(payload.format) || !Array.isArray(payload.breaches)) {
+  console.error("输入不是 injectarena-export@1/@2 导出（请使用 /api/leaderboard?format=export）");
   process.exit(1);
 }
 
 // 2. 清洗：未打码 FLAG / 真实密钥形状的 payload 直接丢弃（宁可少收）
+//    @2 起 unclaimedBreaches（未上榜破阵，匿名）与已上榜 breaches 一并回流。
 const RAW_FLAG = /FLAG\{(?![^}]*REDACTED)[^}]{4,}\}/;
 const REAL_KEY = /(?:sk-[A-Za-z0-9_-]{16,}|ghp_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{20,}|AKIA[0-9A-Z]{16}|xox[baprs]-[A-Za-z0-9-]{10,})/;
+const breachesRaw = [
+  ...payload.breaches,
+  ...(Array.isArray(payload.unclaimedBreaches) ? payload.unclaimedBreaches : []).map((u) => ({
+    ...u, player: null, message: null, githubLogin: null, claimed: false,
+  })),
+];
 const dropped = [];
-const kept = payload.breaches.filter((b) => {
+const kept = breachesRaw.filter((b) => {
   const text = b.payloadText ?? "";
   if (RAW_FLAG.test(text)) return (dropped.push({ id: b.levelId, reason: "未打码 FLAG" }), false);
   if (REAL_KEY.test(text)) return (dropped.push({ id: b.levelId, reason: "疑似真实密钥" }), false);
@@ -75,7 +82,7 @@ for (const b of kept) {
     text: b.payloadText,
     source: "arena",
     verifiedAt: null,
-    meta: { levelId: b.levelId, player: b.player, chars: b.chars, ts: b.ts },
+    meta: { levelId: b.levelId, player: b.player, chars: b.chars, ts: b.ts, claimed: b.claimed ?? true },
   });
 }
 
@@ -96,7 +103,7 @@ const out = {
 
 const day = new Date().toISOString().slice(0, 10);
 const outPath = arg("out") ?? join("candidates", `arena-${day}.json`);
-mkdirSync(outPath.includes("/") ? outPath.slice(0, outPath.lastIndexOf("/")) : ".", { recursive: true });
+mkdirSync(dirname(outPath), { recursive: true });
 writeFileSync(outPath, JSON.stringify(out, null, 2) + "\n", "utf8");
 
 console.log(`候选 ${kept.length} 条（丢弃 ${dropped.length}），覆盖 ${bySurface.size} 个攻击面 → ${outPath}`);

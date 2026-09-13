@@ -2,8 +2,8 @@
   "extractedFrom": "Croesus-K/InjectArena@37aedfd3ed1a33fb28b93bff839aeaeae913a820",
   "extractedAt": "2026-09-06T07:14:02.575Z",
   "files": {
-    "data-exfiltration.json": 15,
-    "direct-injection.json": 50,
+    "data-exfiltration.json": 16,
+    "direct-injection.json": 51,
     "indirect-injection.json": 20,
     "mcp-abuse.json": 16,
     "tool-abuse.json": 15

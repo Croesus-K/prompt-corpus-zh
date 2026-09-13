@@ -48,7 +48,7 @@ InjectArena（攻）与 prompt-audit（守）共用的中文攻击语料的**独
 |---|---|
 | `npm run extract -- <InjectArena 路径>` | seed 抽取：逐字复制 + 校验（id/枚举/唯一性/v2 字段禁用）+ 溯源 `_meta.json` |
 | `npm run validate` | 语料校验：含 RFC-0001 v2 字段约束 + 真实密钥/未打码 FLAG 拒收 |
-| `npm run flywheel -- --export <file\|url>` | 攻→审回流：`injectarena-export@1` → 人工闸候选（`arena-candidates@1`） |
+| `npm run flywheel -- --export <file\|url>` | 攻→审回流：`injectarena-export@1/@2`（@2 含未上榜破阵，匿名）→ 人工闸候选（`arena-candidates@1`） |
 
 ## License
 
