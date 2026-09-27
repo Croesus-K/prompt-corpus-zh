@@ -33,11 +33,12 @@ InjectArena / prompt-audit 共享的中文（含中英混合）提示注入攻�
 
 | split | attackSurface | 条数 |
 |---|---|---|
-| direct_injection | direct-injection | 50 |
-| data_exfiltration | data-exfiltration | 15 |
+| direct_injection | direct-injection | 51 |
+| data_exfiltration | data-exfiltration | 16 |
 | indirect_injection | indirect-injection | 20 |
 | tool_abuse | tool-abuse | 15 |
 | mcp_abuse | mcp-poisoning | 16 |
+| **合计** | — | **118** |
 
 ## 字段
 
