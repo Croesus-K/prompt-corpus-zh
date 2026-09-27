@@ -35,10 +35,11 @@ InjectArena（攻）与 prompt-audit（守）共用的中文攻击语料的**独
 ## 路线图
 
 - [x] M4 前置：schema v2 RFC 起草（[RFC-0001](docs/rfc/RFC-0001-corpus-schema-v2.md)，draft 待非提案方 review）
-- [x] M4：seed 语料入库——`npm run extract` 从 InjectArena 抽取（零变换 + 校验），116 条 / 6 攻击面，溯源见 `corpus/_meta.json`
+- [x] M4：seed 语料入库——`npm run extract` 从 InjectArena 抽取（零变换 + 校验），116 条 / 5 攻击面，溯源见 `corpus/_meta.json`
 - [x] M4：周回流脚本——`npm run flywheel -- --export <导出URL或文件>`，只走公开接口（治理规则 2），输出人工闸候选（宁可少收不可收毒）
-- [ ] 人工闸跑通首批候选（公共实例已上线，导出通道可用；攻方真实破阵 payload 尚待积累，见 [arena 实例](https://croesus-k.top/arena/)）
+- [x] 人工闸跑通首批候选（2026-09-13 首批收录 `ar-001` / `ar-002`——未上榜破阵，匿名化后入 data-exfiltration / direct-injection；现 118 条 / 5 攻击面）
 - [x] npm 首版发布（`0.1.0` 已上架）
+- [x] npm `0.2.0`——飞轮 @2 回流首批 arena 实语料（minor：只增条目）
 - [ ] HuggingFace dataset 首版（发布动作等维护者确认）
 - [ ] `SCHEMA-RFC.md` 流程跑通（首个变更提案走完 review）
 
